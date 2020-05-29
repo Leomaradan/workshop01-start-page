@@ -1,8 +1,8 @@
-import React from "react";
-import LinkGrid from "./LinkGrid";
+import React from 'react';
+import LinkGrid from './LinkGrid';
 
 export default {
-    title: 'LinkGrid',
+  title: 'LinkGrid',
 };
 
 export const defaultView = () => <LinkGrid />;

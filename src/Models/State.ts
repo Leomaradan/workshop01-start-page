@@ -1,16 +1,16 @@
-import { Link } from "./Link";
-import { DataStatus } from "./DataStatus";
+import { Link } from './Link';
+import { DataStatus } from './DataStatus';
 
 export interface LinkState {
-    links: Link[];
-    status: DataStatus;
+  links: Link[];
+  status: DataStatus;
 }
 
 export interface OptionState {
-    editMode: boolean;
+  editMode: boolean;
 }
 
 export interface State {
-    links: LinkState;
-    options: OptionState;
+  links: LinkState;
+  options: OptionState;
 }
