@@ -63,7 +63,8 @@
       "src/Models/**/*.ts?(x)",
       "src/Redux/**/*.ts?(x)",
       "src/Services/**/*.ts?(x)",
-      "!**/*.stories.*"
+      "!**/*.stories.*",
+      "!src/Redux/store.ts"
     ],
     "coverageReporters": [
       "text-summary",
