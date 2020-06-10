@@ -1,3 +1,62 @@
+$unit: 5px;
+
 .GridItem {
-  border: 1px solid black;
+  .Container {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    perspective: 1000px;
+
+    .Card {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+
+      .Front,
+      .Back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border: 1px solid black;
+        border-radius: 3 * $unit;
+        box-sizing: border-box;
+        overflow: hidden;
+        box-shadow: 0 0 1px 0 black inset, 0, 0, 1px 0 black;
+      }
+
+      .Front {
+        img {
+          object-fit: cover;
+          width: 100%;
+        }
+      }
+
+      .Back {
+        background-color: rgba(255, 255, 255, 0.9);
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2 * $unit;
+        font-size: 4 * $unit;
+
+        h1 {
+          font-size: 6 * $unit;
+        }
+
+        p {
+          flex: 2;
+        }
+      }
+    }
+  }
+
+  .Container:hover .Card {
+    transform: rotateY(180deg);
+  }
 }

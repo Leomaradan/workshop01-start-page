@@ -14,4 +14,4 @@ const link: Link = {
   order: 1
 };
 
-export const defaultView = () => <GridItem link={link} />;
+export const defaultView = () => <div style={{ maxWidth: '30vw' }}><GridItem link={link} /></div>;

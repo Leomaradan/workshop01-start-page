@@ -9,28 +9,17 @@ export interface GridItemProps {
 const GridItem: React.SFC<GridItemProps> = ({ link }: GridItemProps) => {
   return (
     <div className={styles.GridItem}>
-      <ul>
-        <li>
-          URL:
-          {link.url}
-        </li>
-        <li>
-          Title:
-          {link.title}
-        </li>
-        <li>
-          Description:
-          {link.description ?? '(no description)'}
-        </li>
-        <li>
-          Order:
-          {link.order}
-        </li>
-        <li>
-          Image:
-          {link.imageUrl}
-        </li>
-      </ul>
+      <div className={styles.Container}>
+        <div className={styles.Card}>
+          <div className={styles.Front}>
+            <img src={link.imageUrl} alt="thumbnail" />
+          </div>
+          <div className={styles.Back}>
+            <h1>{link.title}</h1>
+            <p>{link.description}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
