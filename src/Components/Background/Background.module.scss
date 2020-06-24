@@ -6,6 +6,7 @@
   .Image,
   .Image div {
     @include fullpage;
+    position: fixed;
   }
 
   .Image div {

@@ -12,7 +12,7 @@ import {
 import { linkReducer, initialValue } from './linkReducer';
 import { DataStatus } from '../../Models/DataStatus';
 import { LinkState } from '../../Models/State';
-import dummyService from '../../Services/dummyService';
+import dummyService, { loadDataResult } from '../../Services/dummyService';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -142,12 +142,12 @@ describe('Link Thunk', () => {
   it('should dispatch actions of Load Data with dummy service', () => {
     const expectedActions = [
       SetStatus(DataStatus.Loading),
-      LoadLinks(dummyService.loadData()),
+      LoadLinks(loadDataResult),
     ];
 
     const store = mockStore(initialValue);
 
-    return store.dispatch<any>(LoadData()).then(() => {
+    return store.dispatch<any>(LoadData(dummyService)).then(() => {
       // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
     });

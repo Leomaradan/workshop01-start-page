@@ -4,21 +4,22 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from '../Redux/store';
 import { LoadLinks } from '../Redux/action';
-import dummyService from '../Services/dummyService';
+import dummyService, { loadDataResult } from '../Services/dummyService';
+import { ServiceProvider } from '../Services/ServicesContext';
 
 describe('App', () => {
 
   let component: React.ReactElement;
 
   beforeEach(() => {
-    store.dispatch(LoadLinks(dummyService.loadData()));
+    store.dispatch(LoadLinks(loadDataResult));
 
-    component = <Provider store={store}><App /></Provider>;
+    component = <Provider store={store}><ServiceProvider value={dummyService}><App /></ServiceProvider></Provider>;
   });
 
   it('should renders header', () => {
     const { getByText } = render(component);
-    const linkElement = getByText(/header/i);
+    const linkElement = getByText(/[0-9]{2}:[0-9]{2}/i);
     expect(linkElement).toBeInTheDocument();
   });
 });

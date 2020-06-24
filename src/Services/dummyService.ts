@@ -58,7 +58,7 @@ export const loadDataResult: Link[] = [
   },
 ];
 
-const loadBackgroundImageResults: BackgroundImage[] = [
+export const loadBackgroundImageResults: BackgroundImage[] = [
   {
     authorName: 'Léo Maradan',
     authorUrl: 'https://www.flickr.com/photos/leomaradan/',
@@ -165,7 +165,7 @@ const dummyService: Service = {
     new Promise(resolve => {
       setTimeout(() => {
         resolve(loadBackgroundImageSingleResult());
-      }, 5000);
+      }, 3000);
     }),
 };
 
