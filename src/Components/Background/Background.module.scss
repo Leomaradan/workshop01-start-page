@@ -1,0 +1,32 @@
+@import '../common';
+
+.Background {
+  color: white;
+
+  .Image,
+  .Image div {
+    @include fullpage;
+  }
+
+  .Image div {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 50% 50%;
+  }
+
+  .Credit {
+    position: absolute;
+    bottom: 3 * $unit;
+    left: 3 * $unit;
+    right: 3 * $unit;
+    text-align: left;
+    z-index: 1;
+
+    a {
+      color: inherit;
+    }
+    .Info {
+      float: right;
+    }
+  }
+}

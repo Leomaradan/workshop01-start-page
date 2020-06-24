@@ -1,6 +1,8 @@
-$unit: 5px;
+@import '../common';
 
 .GridItem {
+  color: black;
+
   .Container {
     position: relative;
     width: 100%;
@@ -30,6 +32,7 @@ $unit: 5px;
       }
 
       .Front {
+        background-color: white;
         img {
           object-fit: cover;
           width: 100%;

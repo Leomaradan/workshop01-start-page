@@ -13,12 +13,9 @@ const LinkGrid: React.SFC<LinkGridProps> = () => {
   const links = useSelector((state: State) => state.links.links.sort((a, b) => a.order - b.order));
 
   return (
-    <>
-      <span>LinkGrid</span>
-      <div className={styles.LinkGrid}>
-        {links?.map(link => <GridItem key={link.url} link={link} />)}
-      </div>
-    </>
+    <div className={styles.LinkGrid}>
+      {links?.map(link => <GridItem key={link.url} link={link} />)}
+    </div>
   );
 };
 

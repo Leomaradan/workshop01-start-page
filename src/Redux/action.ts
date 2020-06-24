@@ -1,7 +1,8 @@
 import { Action } from 'redux';
 import { Link } from '../Models/Link';
-import dummyService from '../Services/dummyService';
 import { DataStatus } from '../Models/DataStatus';
+import { BackgroundImage } from '../Models/BackgroundImage';
+import { Service } from '../Services/Service';
 
 export enum ActionsType {
   LoadLinks = 'LoadLinks',
@@ -9,6 +10,7 @@ export enum ActionsType {
   RemoveLink = 'RemoveLink',
   SetStatus = 'SetStatus',
   ToggleEditMode = 'ToggleEditMode',
+  SetBackground = 'SetBackground',
 }
 
 export type LoadLinksAction = Action<ActionsType.LoadLinks> & { links: Link[] };
@@ -22,12 +24,18 @@ export type SetStatusAction = Action<ActionsType.SetStatus> & {
 
 export type ToggleEditModeAction = Action<ActionsType.ToggleEditMode>;
 
+export type SetBackgroundAction = Action<ActionsType.SetBackground> & {
+  image: BackgroundImage;
+};
+
 export type LinksActions =
   | LoadLinksAction
   | AddLinkAction
   | RemoveLinkAction
   | SetStatusAction;
 export type OptionsActions = ToggleEditModeAction;
+
+export type BackgroundActions = SetBackgroundAction;
 
 export const LoadLinks = (links: Link[]): LoadLinksAction => ({
   type: ActionsType.LoadLinks,
@@ -53,16 +61,45 @@ export const ToggleEditMode = (): ToggleEditModeAction => ({
   type: ActionsType.ToggleEditMode,
 });
 
-export const LoadData = () => {
+export const SetBackground = (image: BackgroundImage): SetBackgroundAction => ({
+  type: ActionsType.SetBackground,
+  image,
+});
+
+export const LoadData = (service: Service) => {
   return (dispatch: any) => {
     dispatch(SetStatus(DataStatus.Loading));
 
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const data = dummyService.loadData();
-        dispatch(LoadLinks(data));
-        resolve();
-      }, 1000);
+    return service.loadData().then(data => {
+      dispatch(LoadLinks(data));
+    });
+  };
+};
+
+export const LoadBackgroundImage = (service: Service) => {
+  return (dispatch: any) => {
+    const inCacheImage = localStorage.getItem('background-image');
+
+    if (inCacheImage) {
+      dispatch(SetBackground(JSON.parse(inCacheImage)));
+    }
+
+    return service.loadBackgroundImage().then(data => {
+      return new Promise((resolve, reject) => {
+        const loader = new Image();
+
+        loader.onload = () => {
+          dispatch(SetBackground(data));
+          localStorage.setItem('background-image', JSON.stringify(data));
+          resolve();
+        };
+
+        loader.onerror = () => {
+          reject(new Error(`Image ${data.imageUrl} cannot be loaded.`));
+        };
+
+        loader.src = data.imageUrl;
+      });
     });
   };
 };
